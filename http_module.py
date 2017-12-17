@@ -5,7 +5,7 @@ import os
 
 download_count = 0
 error_count = 0
-user_agent = "Image-extractor 1.0.3"
+user_agent = "Image-extractor 1.0.4"
 def get_json(url):
     header={"User-agent": user_agent}
     req = urllib.request.Request(url=url, headers=header)

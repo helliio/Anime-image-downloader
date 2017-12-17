@@ -7,15 +7,7 @@ import config
 def gen_url(tags,page):
     if page > 1000 or page < 1:
         return(None)
-    if len(tags) == 0:
-        url = config.base_donmai_url + "/posts.json?page=" + str(page) + "&limit=200"
-    elif len(tags) == 1:
-        url = config.base_donmai_url + "/posts.json?page=" + str(page) + "&limit=200&tags=" + tags[0]
-    elif len(tags) == 2:
-        url = config.base_donmai_url + "/posts.json?page=" + str(page) + "&limit=200&tags=" + tags[0] + "+" + tags[1]
-    else:
-        print("invalid number of tags")
-        return(None)
+    url = config.base_donmai_url + "/posts.json?page=" + str(page) + "&limit=200&tags=" + tags
     return url
 
 def get_image_url(json_file):
@@ -40,8 +32,10 @@ def run_image_downloader():
     http_module.download_count = 0
     http_module.error_count = 0
     tags = ""
-    for tag in config.tags:
-        tags = tags + " " + tag
+    if len(config.tags) == 2:
+        tags = config.tags[0] + "+" + config.tags[1]
+    elif len(config.tags) == 1:
+        tags = config.tags[0]
     print("--------------------------------------------------")
     print("Starting downloads for:" + tags)
     print("--------------------------------------------------" + "\n")
@@ -52,7 +46,7 @@ def run_image_downloader():
         start_time = time.time()
         if elapsed_time < 4:
             time.sleep(4)
-        url = gen_url(config.tags,page)
+        url = gen_url(tags,page)
         json = http_module.get_json(url)
         img_dict = get_image_url(json)
         if img_dict is None:
