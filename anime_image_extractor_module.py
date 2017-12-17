@@ -23,10 +23,7 @@ def get_image_url(json_file):
     if not json_file == []:
         for element in json_file:
             if "file_url" in element:
-                title = element["file_url"]
-                filename_location = title.rfind("/")
-                extention_location = title.rfind(".")
-                title = title[filename_location + 1:extention_location]
+                title = element["id"]
                 url = config.base_donmai_url + element["file_url"]
                 ret[title] = url
         return ret
