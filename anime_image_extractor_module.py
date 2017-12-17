@@ -22,7 +22,11 @@ def get_image_url(json_file):
     ret = {}
     if not json_file == []:
         for element in json_file:
-            if "file_url" in element:
+            if "large_file_url" in element and ".zip" in element["file_url"]:
+                title = element["id"]
+                url = config.base_donmai_url + element["large_file_url"]
+                ret[title] = url
+            elif "file_url" in element:
                 title = element["id"]
                 url = config.base_donmai_url + element["file_url"]
                 ret[title] = url

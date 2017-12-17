@@ -5,7 +5,7 @@ import os
 
 download_count = 0
 error_count = 0
-user_agent = "Image-extractor 1.0.1"
+user_agent = "Image-extractor 1.0.2"
 def get_json(url):
     header={"User-agent": user_agent}
     req = urllib.request.Request(url=url, headers=header)
@@ -27,7 +27,7 @@ def download_img(urls, path, down_limit):
     save_dir = mk_save_dir(path)
     for key, value in urls.items():
         extention_location = value.rfind(".")
-        file_name = (save_dir + str(key) + value[extention_location: extention_location + 4]).encode("utf-8")
+        file_name = (save_dir + str(key) + value[extention_location: extention_location + 5]).encode("utf-8")
         if (not os.path.exists(file_name)) and (download_count < down_limit):
             download_count += 1
             try:
