@@ -2,7 +2,7 @@ import config
 
 def run_menu():
     print("--------------------------------------------------")
-    print("Welcome to Anime image extractor version 1.0.4")
+    print("Welcome to Anime image extractor version 1.0.5")
     print("--------------------------------------------------" + "\n")
     prompt_tags()
     prompt_down_limit()

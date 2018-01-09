@@ -12,7 +12,7 @@ def gen_url(tags,page):
 
 def get_image_url(json_file):
     ret = {}
-    if not json_file == []:
+    if json_file and (not "success" in json_file):
         for element in json_file:
             if "file_url" in element:
                 if "large_file_url" in element and ".zip" in element["file_url"] and ".zip" not in element["large_file_url"] and element["is_deleted"] is False:
@@ -37,7 +37,7 @@ def run_image_downloader():
     elif len(config.tags) == 1:
         tags = config.tags[0]
     print("--------------------------------------------------")
-    print("Starting downloads for:" + tags)
+    print("Starting downloads for: " + tags)
     print("--------------------------------------------------" + "\n")
     page = 1
     elapsed_time = 4
@@ -57,5 +57,5 @@ def run_image_downloader():
         total_dict.update(img_dict)
     url_to_file_module.write_dict(tags, "image/url/" + tags, total_dict)
     print("--------------------------------------------------")
-    print("Done downloading" + tags + " Error Count: " + str(http_module.error_count))
+    print("Done downloading " + tags + " Error Count: " + str(http_module.error_count))
     print("--------------------------------------------------" + "\n")
